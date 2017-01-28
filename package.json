@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "phantomjs-prebuilt": "^2.1.14"
+  },
+  "name": "wuxiaworld-scrapper",
+  "version": "1.0.0",
+  "description": "WIP: Wuxiaworld scrapper and epub creator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wuxiaworld"
+  ],
+  "author": "fallen90",
+  "license": "MIT"
+}
