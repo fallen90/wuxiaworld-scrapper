@@ -12,7 +12,7 @@ var epub = require("epub-gen"),
         publisher: "fallen-epub-generator", // optional
         lang: 'en',
         output: "files/path.epub",
-        cover: "covers/sotr.jpg", // Url or File path, both ok.
+        cover: "cover.png", // Url or File path, both ok.
         content: []
     };
 
@@ -48,6 +48,9 @@ function loadContents(done) {
 
     });
 }
+
+loadContents();
+
 
 module.exports = {
     setOptions: options => {
