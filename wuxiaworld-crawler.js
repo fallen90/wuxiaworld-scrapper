@@ -5,8 +5,9 @@ var request = require('request'),
     _utils = require('./wuxiaworld-utils'),
     uniq = _utils.uniq,
     _write = _utils.writeFile,
+    _contents = _utils.getContents;
     _basename = _utils.basename,
-    start_url = "http://m.wuxiaworld.com/mga-index/mga-chapter-1234/",
+    start_url = "http://www.wuxiaworld.com/absolute-choice-index/ac-chapter-106/",
     url_list = [start_url];
 console.log('[ ******** Wuxiaworld Crawler ******** ]');
 
@@ -41,15 +42,25 @@ var crawler = function (url) {
                         url_list.push($(links[i]).attr('href'));
                         url_to_loop = $(links[i]).attr('href');
                         request_loop = true;
-                    }
+                    } 
                 }
             }
 
-            if (request_loop) {
-                crawler(url_to_loop);
-            } else {
+            //download this chapter
+
+            _contents(body, _basename(url), function(){
+                if(request_loop){
+                    crawler(url_to_loop);
+                } else {
+                    console.log('[ ^_^v ] Finished!!');
+                }
+            });
+
+            // if (request_loop) {
+            //     crawler(url_to_loop);
+            // } else {
                 
-            }
+            // }
         } else {
             if (response && response.statusCode == '404') {
                 save(JSON.stringify(uniq(url_list)));

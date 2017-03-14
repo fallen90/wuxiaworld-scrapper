@@ -2,7 +2,7 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 module.exports = {
     uniq: a => {
-        return a.sort().filter(function (item, pos, ary) {
+        return a.sort().filter(function(item, pos, ary) {
             return !pos || item != ary[pos - 1];
         })
     },
@@ -26,15 +26,15 @@ module.exports = {
             done(err, data);
         });
     },
-    readFileSync : (file) => {
-        if(fs.existsSync(file)){
+    readFileSync: (file) => {
+        if (fs.existsSync(file)) {
             return fs.readFileSync(file);
         }
     },
     exists: (path) => {
         return fs.existsSync(path);
     },
-    delete : (path) => {
+    delete: (path) => {
         fs.unlinkSync(path);
     },
     mkdir: (dir) => {
@@ -54,6 +54,46 @@ module.exports = {
                 title: $('title').text(),
                 data: $('body').html()
             });
+        });
+    },
+    getContents: (body, filename, done) => {
+        var $ = cheerio.load(body);
+        var article = $('[itemprop="articleBody"]');
+
+        $('body').html(article);
+        $('body div > p a').parent().remove();
+        $('body hr').remove();
+        $('body').attr('class', '');
+
+        var x = cheerio.load($('body [itemprop="articleBody"] *:first-child').first().html());
+        x('sup').remove()
+        x('.footnote').remove();
+        var title = x.text();
+
+        $('head').html('<meta content="width=device-width,maximum-scale=1.0,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes" name="viewport">');
+        $('head').append('<title>' + title + '</title>');
+        //remove links
+        $('body a').each((index, element) => {
+            if ($(element).text().includes("Chapter")) {
+                $(element).remove();
+            }
+        });
+
+        $('.footnotes').css({
+            'font-style': 'italic',
+            'border': '1px solid #ccc',
+            'padding': '12px'
+        });
+
+        if (!fs.existsSync('files/output')) {
+            fs.mkdirSync('files/output');
+        }
+
+        require('./wuxiaworld-utils').writeFile('files/output/' + filename + '.html', $.html(), () => {
+
+            console.log('\t [ +++ ] File saved!', filename);
+
+            done();
         });
     }
 }
