@@ -12,7 +12,7 @@ pimg.registerFont('./calibril.ttf', 'calibri', 'light', 'regular', '').load(func
     ctx.setFont('calibri', 50);
     wrapText(ctx, "Absolute Choice", 80, 120, 200, 100);
 
-    pimg.encodePNG(img1, fs.createWriteStream('covers/sotr.png'), function(err) {
+    pimg.encodePNG(img1, fs.createWriteStream('cover.png'), function(err) {
         
         console.log("wrote cover the png file to cover.png");
     });
