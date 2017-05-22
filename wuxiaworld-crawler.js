@@ -7,7 +7,7 @@ var request = require('request'),
     _write = _utils.writeFile,
     _contents = _utils.getContents;
     _basename = _utils.basename,
-    start_url = "http://www.wuxiaworld.com/absolute-choice-index/ac-chapter-106/",
+    start_url = "http://www.wuxiaworld.com/martialworld-index/mw-chapter-562/",
     url_list = [start_url];
 console.log('[ ******** Wuxiaworld Crawler ******** ]');
 
@@ -16,16 +16,16 @@ var crawler = function (url) {
     let request_loop = false;
     let url_to_loop = "";
 
-    if (url.includes('www.wuxiaworld.com')) {
-        url = url.replace('www', 'm');
-    }
+    // if (url.includes('www.wuxiaworld.com')) {
+    //     url = url.replace('www', 'm');
+    // }
 
     console.log('[ = ] Loading Url ' + url);
     request({
         url: url,
         timeout : 20000,
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Mobile Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36'
         }
     }, function (error, response, body) {
 

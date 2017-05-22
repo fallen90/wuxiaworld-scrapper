@@ -19,7 +19,7 @@ module.exports = {
         return b
     },
     writeFile: (filename, data, done) => {
-        fs.writeFile(filename, data, 'utf8', done());
+        fs.writeFile(filename, data, 'utf8', done);
     },
     readFile: (file, done) => {
         fs.readFile(file, 'utf8', function readFileCallback(err, data) {
@@ -65,10 +65,18 @@ module.exports = {
         $('body hr').remove();
         $('body').attr('class', '');
 
-        var x = cheerio.load($('body [itemprop="articleBody"] *:first-child').first().html());
-        x('sup').remove()
-        x('.footnote').remove();
-        var title = x.text();
+        var title = "";
+
+        try {
+            var x = cheerio.load($('body [itemprop="articleBody"]').first().html());
+            x('sup').remove()
+            x('.footnote').remove();
+            title = x.text();
+        } catch(ex){
+            console.log('Error encountered', ex, $.html());
+            process.exit(0);
+        }
+
 
         $('head').html('<meta content="width=device-width,maximum-scale=1.0,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes" name="viewport">');
         $('head').append('<title>' + title + '</title>');

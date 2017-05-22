@@ -2,6 +2,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "epub-gen": "^0.0.17",
+    "html-minifier": "^3.4.3",
     "pureimage": "^0.0.17",
     "request": "^2.79.0"
   },

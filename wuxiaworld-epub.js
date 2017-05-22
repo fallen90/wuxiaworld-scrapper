@@ -6,19 +6,11 @@ var epub = require("epub-gen"),
     _write = _utils.writeFile,
     _delete = _utils.delete,
     _exists = _utils.exists,
-    option = {
-        title: "MGA", // *Required, title of the book.
-        author: "MGA", // *Required, name of the author.
-        publisher: "fallen-epub-generator", // optional
-        lang: 'en',
-        output: "files/path.epub",
-        cover: "cover.png", // Url or File path, both ok.
-        content: []
-    };
+    option = require('./settings.json');
 
 
 function loadContents(done) {
-    let base_dir = 'files/output/';
+    let base_dir = option.base_dir;
     _files(base_dir, (err, files) => {
         let done_extract = 0;
 
@@ -52,24 +44,24 @@ function loadContents(done) {
 loadContents();
 
 
-module.exports = {
-    setOptions: options => {
-        option = options;
-    },
-    setBookDetails: details => {
-        option.title = details.title;
-        option.author = details.author;
-        option.publisher = details.publisher;
-        option.output = details.output;
-        option.cover = details.cover;
-    },
-    create: (output, done) => {
-        if(output){
-            option.output = output;
-        }
+// module.exports = {
+//     setOptions: options => {
+//         option = options;
+//     },
+//     setBookDetails: details => {
+//         option.title = details.title;
+//         option.author = details.author;
+//         option.publisher = details.publisher;
+//         option.output = details.output;
+//         option.cover = details.cover;
+//     },
+//     create: (output, done) => {
+//         if(output){
+//             option.output = output;
+//         }
 
-        new epub(option).promise.then( () => {
-            done(option.output);
-        });
-    }
-};
+//         new epub(option).promise.then( () => {
+//             done(option.output);
+//         });
+//     }
+// };

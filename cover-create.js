@@ -10,7 +10,7 @@ pimg.registerFont('./calibril.ttf', 'calibri', 'light', 'regular', '').load(func
     ctx.fillStyle = "#FFFfff";
     ctx.lineStyle = "#FFFfff";
     ctx.setFont('calibri', 50);
-    wrapText(ctx, "Absolute Choice", 80, 120, 200, 100);
+    wrapText(ctx, "Martial World", 80, 120, 200, 100);
 
     pimg.encodePNG(img1, fs.createWriteStream('cover.png'), function(err) {
         

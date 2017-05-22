@@ -1,0 +1,10 @@
+{
+    "title": "Martial World",
+    "author": "Martial World",
+    "publisher": "fallen-epub-generator", 
+    "lang": "en",
+    "output": "files/path.epub",
+    "cover": "cover.png",
+    "content": [],
+    "base_dir" : "files/temp_output/"
+}
